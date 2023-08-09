@@ -1,0 +1,27 @@
+#!/bin/sh
+
+case "$1" in
+vol)
+    info=$(wpctl get-volume @DEFAULT_AUDIO_SINK@)
+    muted=$(echo "$info" | cut -d' ' -f3 | tr -d '[]')
+    vol=$(echo "$info" | cut -d' ' -f2 | xargs -I %% echo '%% * 100' | bc -l)
+    if [ "$muted" = "MUTED" ]; then
+        is_muted="true"
+    else
+        is_muted="false"
+    fi
+    eww -c "$EWW_ROOT" update current-volume="$vol" is-muted-volume="$is_muted"
+    ;;
+mic)
+    info=$(wpctl get-volume @DEFAULT_AUDIO_SOURCE@)
+    muted=$(echo "$info" | cut -d' ' -f3 | tr -d '[]')
+    vol=$(echo "$info" | cut -d' ' -f2 | xargs -I %% echo '%% * 100' | bc -l)
+    if [ "$muted" = "MUTED" ]; then
+        is_muted="true"
+    else
+        is_muted="false"
+    fi
+    eww -c "$EWW_ROOT" update current-mic="$vol" is-muted-mic="$is_muted"
+    ;;
+*) ;;
+esac

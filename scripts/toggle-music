@@ -1,0 +1,15 @@
+#!/bin/sh
+
+state="$(cat /tmp/music-shown)"
+case "$state" in
+    0)
+        eww open music
+        echo 1 > /tmp/music-shown
+        ;;
+    1)
+        eww close music
+        echo 0 > /tmp/music-shown
+        ;;
+    *)
+        ;;
+esac

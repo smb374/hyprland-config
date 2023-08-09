@@ -1,0 +1,4 @@
+#!/bin/sh
+
+light -S "$1"
+eww -c "$EWW_ROOT" update current-brightness="$1"

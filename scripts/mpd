@@ -1,0 +1,48 @@
+#!/bin/sh
+
+while getopts 'ilorpsct' opt; do
+    case "$opt" in
+    c)
+        file="$(mpc status -f %file% | sed -n '1p')"
+        parent="$(dirname "$HOME/Music/$file")"
+        cover="$(fd -c never -t f -i '(folder|cover)\.(jpg|jpeg|png|tif|tiff|gif)' "$parent" | sed -n '1p' | tr -d '\n')"
+
+        if [ -z "$cover" ]; then
+            echo "$HOME/placeholder.png"
+        else
+            echo "$cover"
+        fi
+        ;;
+    i)
+        mpc -f '\["%artist%", "%title%", "%album%"\]' | sed -n '1p'
+        ;;
+    o)
+        single=$(mpc status %single%)
+        if [ "$single" = "on" ]; then
+            echo true
+        else
+            echo false
+        fi
+        ;;
+    p)
+        state=$(mpc status %state%)
+        if [ "$state" = "playing" ]; then
+            echo true
+        else
+            echo false
+        fi
+        ;;
+    r)
+        repeat=$(mpc status %repeat%)
+        if [ "$repeat" = "on" ]; then
+            echo true
+        else
+            echo false
+        fi
+        ;;
+    s)
+        mpc status %percenttime% | tr -d ' %'
+        ;;
+    *) ;;
+    esac
+done

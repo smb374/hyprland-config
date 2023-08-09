@@ -1,0 +1,2 @@
+#!/bin/sh
+swaybg -i $HOME/Pictures/Wallpapers/104200866_p0.png -m fit -c '#11111b'

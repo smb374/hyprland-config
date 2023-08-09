@@ -1,0 +1,2 @@
+#!/bin/sh
+free -m | sed -n '2p' | awk '{printf "scale=2; (%d / %d) * 100\n", $7, $2}' | bc -l

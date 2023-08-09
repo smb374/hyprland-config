@@ -1,0 +1,4 @@
+#!/bin/sh
+plugged=$(cat /sys/class/power_supply/AC/online)
+cap=$(cat /sys/class/power_supply/BAT0/capacity)
+echo "[$plugged, $cap]"

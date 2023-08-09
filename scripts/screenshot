@@ -1,0 +1,11 @@
+#!/bin/sh
+
+case "$1" in
+"select")
+    geo=$(slurp)
+    wayshot -s "$geo" -f "$HOME/screenshots/$(date +'%Y.%m.%d-%H.%M.%S.screenshot.select.png')"
+    ;;
+*)
+    wayshot -f "$HOME/screenshots/$(date +'%Y.%m.%d-%H.%M.%S.screenshot.png')"
+    ;;
+esac

@@ -1,0 +1,27 @@
+#!/bin/sh
+
+MPD_UPDATE="$SCRIPT_ROOT/update-mpd"
+cover_cache=""
+title_cache=""
+icon="/tmp/music_cover_icon.jpg"
+
+routine() {
+    sh "$MPD_UPDATE"
+    cover="$(mpd_cover_path)"
+    if [ "$cover" != "$cover_cache" ]; then
+        cover_cache="$cover"
+        convert -resize x64 "$cover" -quality 90 "$icon"
+    fi
+    title="$(mpc status -f '%title%' | sed -n '1p')"
+    if [ "$title" != "$title_cache" ]; then
+        title_cache="$title"
+        content="$(mpc status -f '%album%\n%artist%' | sed -n '1,2p')"
+        notify-send -t 5000 -i "$icon" "$title" "$content"
+    fi
+}
+
+routine
+
+mpc idleloop | while read -r _; do
+    routine
+done
