@@ -47,15 +47,13 @@ case $chosen in
     fi
     ;;
 "$lock")
-    # light-locker-command -l
-    gtklock
+    "$SCRIPT_ROOT/screenlock"
     ;;
 "$suspend")
     ans=$(confirm_exit)
     if [[ "$ans" == "$yes" ]]; then
         mpc -q pause
-        # light-locker-command -l
-        gtklock
+        "$SCRIPT_ROOT/screenlock"
         systemctl suspend
     else
         exit

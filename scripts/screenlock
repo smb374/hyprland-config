@@ -1,0 +1,2 @@
+#!/bin/sh
+gtklock -c "$HYPRLAND_ROOT/gtklock/config.ini" -s "$HYPRLAND_ROOT/gtklock/style.css"
