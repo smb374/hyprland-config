@@ -7,7 +7,7 @@ info=$("$mpd" -i)
 single="$("$mpd" -o)"
 playing=$("$mpd" -p)
 repeat="$("$mpd" -r)"
-max_art_width="$(identify "$art" | awk -F' ' '{print $(NF-6);}' | awk -F'x' '{printf "(%d / %d) * 120.0\n", $1, $2}' | bc -l)"
+max_art_width="$(identify "$art" | awk -F' ' '{print $(NF-6);}' | awk -F'x' '{printf "(%d / %d) * 200.0\n", $1, $2}' | bc -l)"
 
 eww -c "$EWW_ROOT" update \
     cover-path="$art" \

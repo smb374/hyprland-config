@@ -10,7 +10,7 @@ window#waybar {
 }
 
 #workspaces {
-    background: #1e1e2e;
+    background-color: #1e1e2e;
     padding-left: 5px;
     padding-right: 5px;
 }
@@ -20,12 +20,12 @@ window#waybar {
     padding: 3px;
 }
 
-#workspaces button.active {
-    color: #b4befe;
+#workspaces button.empty {
+    color: #45475a;
 }
 
-#workspaces button.persistent {
-    color: #45475a;
+#workspaces button.active {
+    color: #b4befe;
 }
 
 #tray {

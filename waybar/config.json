@@ -3,12 +3,20 @@
   "position": "top",
   "margin": "10 10 0 10",
   "spacing": 5,
-  "modules-left": ["custom/menu", "wlr/workspaces"],
+  "modules-left": [
+    "custom/menu",
+    "hyprland/workspaces"
+  ],
   "modules-center": [],
-  "modules-right": ["clock", "battery", "tray"],
-  "wlr/workspaces": {
+  "modules-right": [
+    "clock",
+    "battery",
+    "tray"
+  ],
+  "hyprland/workspaces": {
     "format": "{icon}",
-    "persistent_workspaces": {
+    "persistent-workspaces": {
+      "0": [],
       "1": [],
       "2": [],
       "3": [],
