@@ -1,0 +1,11 @@
+@import "./mocha.scss";
+
+.volume {
+    padding: 0;
+}
+
+.volume label {
+    font-size: 22px;
+    color: $sky;
+    padding: 0;
+}

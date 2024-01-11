@@ -1,0 +1,41 @@
+@import "./mocha.scss";
+
+.battery {
+    padding: 0;
+}
+
+.battery > label.charging {
+    color: $green;
+}
+
+.battery > label.high {
+    color: $blue;
+}
+
+.battery > label.mid {
+    color: $yellow;
+}
+
+.battery > label.low {
+    color: $red;
+}
+
+.battery > progressbar trough {
+    min-width: 50px;
+}
+
+.battery > progressbar.charging trough progress {
+    background: $green;
+}
+
+.battery > progressbar.high trough progress {
+    background: $blue;
+}
+
+.battery > progressbar.mid trough progress {
+    background: $yellow;
+}
+
+.battery > progressbar.low trough progress {
+    background: $red;
+}

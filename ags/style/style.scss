@@ -1,0 +1,39 @@
+@import "./mocha.scss";
+
+* {
+    font-family: "JetBrainsMono NFM";
+    font-size: 12pt;
+}
+
+.bar {
+    background-color: transparent;
+}
+
+.container {
+    margin: 5px 10px 5px 10px;
+}
+
+label {
+    font-weight: bold;
+}
+
+button {
+    background: transparent;
+}
+
+button:hover {
+    box-shadow: unset;
+}
+
+progressbar trough {
+    background: $surface1;
+    border-radius: 5px;
+}
+
+@import "./workspace.scss";
+@import "./systray.scss";
+@import "./clock.scss";
+@import "./battery.scss";
+@import "./info.scss";
+@import "./volume.scss";
+@import "./brightness.scss";

@@ -1,0 +1,9 @@
+@import "./mocha.scss";
+
+.clock {
+    background: $base;
+    border-radius: 5px;
+    color: $text;
+    font-weight: bold;
+    padding: 0 10px 0 10px;
+}
