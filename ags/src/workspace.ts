@@ -1,8 +1,6 @@
-import Hyprland from "resource:///com/github/Aylur/ags/service/hyprland.js";
-import * as Widget from "resource:///com/github/Aylur/ags/widget.js";
-import { execAsync } from "resource:///com/github/Aylur/ags/utils.js";
-import Gtk from "../node_modules/@girs/gtk-3.0/gtk-3.0.js";
+import Gtk from "gi://Gtk?version=3.0";
 
+const hyprland = await Service.import("hyprland");
 const class_set = ["focused", "occupied", "blank"];
 
 function clean_added_class(ctx: Gtk.StyleContext) {
@@ -13,37 +11,43 @@ function clean_added_class(ctx: Gtk.StyleContext) {
   });
 }
 
+function dispatch(ws: number | string) {
+  hyprland.messageAsync(`dispatch workspace ${ws}`);
+}
+
 export default function() {
-  return Widget.Box({
-    class_name: "workspaces",
+  const wsbox = Widget.Box({
+    className: "workspaces",
     children: Array.from({ length: 9 }, (_, i) => i + 1).map(i => Widget.Button({
-      on_clicked: () => execAsync(`hyprctl dispatch workspace ${i}`),
+      on_clicked: () => dispatch(i),
       child: Widget.Label({ label: "\udb82\uddde" }),
-      class_name: "blank",
+      className: "blank",
     })),
-    connections: [[Hyprland.active.workspace, self => {
-      const activeId = Hyprland.active.workspace.id;
-      const ctx = self.children[activeId - 1].get_style_context();
-      clean_added_class(ctx);
-      ctx.add_class("focused");
-      // Hyprland.workspaces is not synced when active workspace changes
-      // have to use this to avoid wrong class.
-      execAsync(`hyprctl -j workspaces`).then(out => {
-        const wss = JSON.parse(out).map((w: { id: number }) => w.id || 0);
-        self.children.forEach((box, i) => {
-          const ctx = box.get_style_context();
-          const idx = i + 1;
-          if (idx == activeId) {
-            return;
-          }
-          clean_added_class(ctx);
-          if (wss.includes(idx)) {
-            ctx.add_class("occupied");
-          } else {
-            ctx.add_class("blank");
-          }
-        });
-      })
-    }]],
+  }).hook(hyprland.active.workspace, self => {
+    const activeId = hyprland.active.workspace.id;
+    const ctx = self.children[activeId - 1].get_style_context();
+    clean_added_class(ctx);
+    ctx.add_class("focused");
+    Utils.execAsync(`hyprctl -j workspaces`).then(out => {
+      const wss = JSON.parse(out).map((w: { id: number }) => w.id ?? 0);
+      self.children.forEach((box, i) => {
+        const ctx = box.get_style_context();
+        const idx = i + 1;
+        if (idx == activeId) {
+          return;
+        }
+        clean_added_class(ctx);
+        if (wss.includes(idx)) {
+          ctx.add_class("occupied");
+        } else {
+          ctx.add_class("blank");
+        }
+      });
+    })
+  });
+  return Widget.EventBox({
+    onScrollUp: () => dispatch("+1"),
+    onScrollDown: () => dispatch("-1"),
+    child: wsbox,
   });
 }

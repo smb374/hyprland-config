@@ -1,7 +1,6 @@
-import Battery from "./battery.js";
-import { VolumeIcon } from "./volume.js";
-import { BrightnessIcon } from "./brightness.js";
-import * as Widget from "resource:///com/github/Aylur/ags/widget.js";
+import Battery from "./battery";
+import { VolumeIcon } from "./volume";
+import { BrightnessIcon } from "./brightness";
 
 function Separator() {
   return Widget.Label({

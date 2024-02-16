@@ -1,7 +1,6 @@
-import Gtk from "../node_modules/@girs/gtk-3.0/gtk-3.0.js";
-import Battery from "resource:///com/github/Aylur/ags/service/battery.js";
-import * as Widget from "resource:///com/github/Aylur/ags/widget.js";
+import Gtk from "gi://Gtk?version=3.0";
 
+const battery = await Service.import("battery");
 const class_set = ["charging", "high", "mid", "low"];
 
 function clean_added_class(ctx: Gtk.StyleContext) {
@@ -15,11 +14,11 @@ function clean_added_class(ctx: Gtk.StyleContext) {
 function updateBatClass(widget: Gtk.Widget) {
   const ctx = widget.get_style_context();
   clean_added_class(ctx);
-  if (Battery.charging) {
+  if (battery.charging) {
     ctx.add_class("charging");
-  } else if (Battery.percent >= 75) {
+  } else if (battery.percent >= 75) {
     ctx.add_class("high");
-  } else if (Battery.percent >= 25) {
+  } else if (battery.percent >= 25) {
     ctx.add_class("mid");
   } else {
     ctx.add_class("low");
@@ -28,28 +27,20 @@ function updateBatClass(widget: Gtk.Widget) {
 
 export default function() {
   return Widget.Box({
-    class_name: "battery",
+    className: "battery",
     vertical: false,
     spacing: 5,
-    binds: [["tooltipText", Battery, "percent", p => `Battery: ${p}%`]],
+    tooltipText: battery.bind("percent").as(p => `Battery: ${p}%`),
     children: [
       Widget.Label({
         valign: Gtk.Align.CENTER,
         label: "\udb85\udc0b",
-        connections: [[Battery, self => updateBatClass(self)]],
-      }),
+      }).hook(battery, self => updateBatClass(self)),
       Widget.ProgressBar({
         valign: Gtk.Align.CENTER,
         vertical: false,
-        value: Math.max(0, Battery.percent) / 100.0,
-        binds: [
-          ["value", Battery, "percent",
-            // Shut up TSC.
-            p => Math.max(0, typeof p === "number" ? p : 0) / 100.0
-          ],
-        ],
-        connections: [[Battery, self => updateBatClass(self)]],
-      }),
+        value: battery.bind("percent").as(p => p > 0 ? p / 100 : 0),
+      }).hook(battery, self => updateBatClass(self)),
     ],
   });
 }

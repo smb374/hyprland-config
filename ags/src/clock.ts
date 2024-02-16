@@ -1,14 +1,10 @@
-import * as Widget from "resource:///com/github/Aylur/ags/widget.js";
-import { execAsync } from "resource:///com/github/Aylur/ags/utils.js";
+const curTime = Variable("Xxx --. --:--", {
+  poll: [1000, ["date", "+%b %e. %H:%M"]],
+});
 
-export default function Clock() {
+export default function() {
   return Widget.Label({
-    class_name: "clock",
-    connections: [
-      [1000, self => execAsync(["date", "+%b %e. %H:%M"])
-        .then(date => self.set_label(date))
-        .catch(console.error)
-      ]
-    ]
+    className: "clock",
+    label: curTime.bind(),
   });
 }
