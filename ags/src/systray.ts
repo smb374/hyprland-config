@@ -2,12 +2,12 @@ const systemtray = await Service.import("systemtray");
 
 export default function() {
   return Widget.Box({
-    className: "tray",
+    class_name: "tray",
     children: systemtray.bind("items").as(i => i.map(item => Widget.Button({
       child: Widget.Icon().bind("icon", item, "icon"),
-      tooltipMarkup: item.bind("tooltip_markup"),
-      onPrimaryClick: (_, event) => item.activate(event),
-      onSecondaryClick: (_, event) => item.openMenu(event),
+      tooltip_markup: item.bind("tooltip_markup"),
+      on_primary_click: (_, event) => item.activate(event),
+      on_secondary_click: (_, event) => item.openMenu(event),
     }))),
   });
 }

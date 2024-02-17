@@ -11,17 +11,15 @@ function clean_added_class(ctx: Gtk.StyleContext) {
   });
 }
 
-function updateBatClass(widget: Gtk.Widget) {
-  const ctx = widget.get_style_context();
-  clean_added_class(ctx);
+function bat_hook(widget: { class_name: String }) {
   if (battery.charging) {
-    ctx.add_class("charging");
+    widget.class_name = "charging";
   } else if (battery.percent >= 75) {
-    ctx.add_class("high");
+    widget.class_name = "high";
   } else if (battery.percent >= 25) {
-    ctx.add_class("mid");
+    widget.class_name = "mid";
   } else {
-    ctx.add_class("low");
+    widget.class_name = "low";
   }
 }
 
@@ -35,12 +33,14 @@ export default function() {
       Widget.Label({
         valign: Gtk.Align.CENTER,
         label: "\udb85\udc0b",
-      }).hook(battery, self => updateBatClass(self)),
+        setup: self => bat_hook(self),
+      }),
       Widget.ProgressBar({
         valign: Gtk.Align.CENTER,
         vertical: false,
         value: battery.bind("percent").as(p => p > 0 ? p / 100 : 0),
-      }).hook(battery, self => updateBatClass(self)),
+        setup: self => bat_hook(self),
+      }),
     ],
   });
 }

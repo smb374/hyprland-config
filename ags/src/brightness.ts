@@ -86,7 +86,7 @@ class BrightnessService extends Service {
 // the singleton instance
 const brightness = new BrightnessService;
 
-function getBrightnessIcon(val: number): string {
+function get_icon(val: number): string {
   if (val === 0) {
     return `\udb80\udcde`;
   }
@@ -102,12 +102,12 @@ function getBrightnessIcon(val: number): string {
 
 export function BrightnessIcon() {
   return Widget.Box({
-    className: "brightness",
+    class_name: "brightness",
     valign: Gtk.Align.CENTER,
     child: Widget.Label({
       valign: Gtk.Align.CENTER,
-      label: brightness.bind("screen_value").as(v => getBrightnessIcon(v * 100 ?? 0)),
-      tooltipText: brightness.bind("screen_value").as(v => `Brightness ${v * 100 ?? 0}%`),
+      label: brightness.bind("screen_value").as(v => get_icon((v ?? 0) * 100)),
+      tooltip_text: brightness.bind("screen_value").as(v => `Brightness ${(v ?? 0) * 100}%`),
     })
   });
 }

@@ -1,15 +1,13 @@
 import Gtk from "gi://Gtk?version=3.0";
+import { Stream } from "resource:///com/github/Aylur/ags/service/audio.js";
 
 const audio = await Service.import("audio");
 
-function getVolIcon(): string {
-  if (!audio.speaker) {
-    return `\udb81\udf5f`;
-  }
-  if (audio.speaker?.stream?.is_muted ?? false) {
+function get_vol_icon(speaker: Stream): string {
+  if (speaker?.is_muted ?? true) {
     return `\udb81\udd81`;
   }
-  const vol = audio.speaker.volume * 100;
+  const vol = (speaker?.volume ?? 0) * 100;
   const icon_list: [number, string][] = [
     [101, `\udb81\udf5d`],
     [67, `\udb81\udd7e`],
@@ -18,17 +16,15 @@ function getVolIcon(): string {
     [0, `\udb83\ude08`],
   ];
   const icon = icon_list.find(([thres, _]) => thres <= vol)?.[1];
-  return icon || `\udb83\ude08`;
+  return icon ?? `\udb83\ude08`;
 }
 
 export function VolumeIcon() {
   const icon = Widget.Label({
     valign: Gtk.Align.CENTER,
-    label: getVolIcon(),
-  }).hook(audio, self => {
-    self.set_label(getVolIcon());
-    self.set_tooltip_text(`Volume ${Math.floor((audio.speaker?.volume ?? 0) * 100)}%`);
-  }, "speaker-changed");
+    label: audio.bind("speaker").as(s => get_vol_icon(s)),
+    tooltip_text: audio.bind("speaker").as(s => `Volume ${Math.floor((s?.volume ?? 0) * 100)}%`)
+  })
   return Widget.Box({
     className: "volume",
     valign: Gtk.Align.CENTER,

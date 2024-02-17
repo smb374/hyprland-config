@@ -1,53 +1,35 @@
-import Gtk from "gi://Gtk?version=3.0";
-
 const hyprland = await Service.import("hyprland");
-const class_set = ["focused", "occupied", "blank"];
-
-function clean_added_class(ctx: Gtk.StyleContext) {
-  class_set.forEach((cls) => {
-    if (ctx.has_class(cls)) {
-      ctx.remove_class(cls);
-    }
-  });
-}
 
 function dispatch(ws: number | string) {
   hyprland.messageAsync(`dispatch workspace ${ws}`);
 }
 
+function is_occupied(idx: number): boolean {
+  return hyprland.workspaces.some(ws => ws.id === idx && ws.windows !== 0);
+}
+
 export default function() {
   const wsbox = Widget.Box({
-    className: "workspaces",
+    class_name: "workspaces",
     children: Array.from({ length: 9 }, (_, i) => i + 1).map(i => Widget.Button({
+      attribute: i,
       on_clicked: () => dispatch(i),
       child: Widget.Label({ label: "\udb82\uddde" }),
-      className: "blank",
-    })),
-  }).hook(hyprland.active.workspace, self => {
-    const activeId = hyprland.active.workspace.id;
-    const ctx = self.children[activeId - 1].get_style_context();
-    clean_added_class(ctx);
-    ctx.add_class("focused");
-    Utils.execAsync(`hyprctl -j workspaces`).then(out => {
-      const wss = JSON.parse(out).map((w: { id: number }) => w.id ?? 0);
-      self.children.forEach((box, i) => {
-        const ctx = box.get_style_context();
-        const idx = i + 1;
-        if (idx == activeId) {
-          return;
-        }
-        clean_added_class(ctx);
-        if (wss.includes(idx)) {
-          ctx.add_class("occupied");
+      class_name: "blank",
+      setup: self => self.bind("class_name", hyprland.active.workspace, "id", id => {
+        if (self.attribute === id) {
+          return "focused";
+        } else if (is_occupied(self.attribute)) {
+          return "occupied";
         } else {
-          ctx.add_class("blank");
+          return "blank";
         }
-      });
-    })
+      }),
+    })),
   });
   return Widget.EventBox({
-    onScrollUp: () => dispatch("+1"),
-    onScrollDown: () => dispatch("-1"),
+    on_scroll_up: () => dispatch("+1"),
+    on_scroll_down: () => dispatch("-1"),
     child: wsbox,
   });
 }
