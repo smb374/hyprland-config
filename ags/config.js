@@ -14,4 +14,6 @@ try {
 
 const main = await import(`file://${outdir}/main.js`)
 
-export default main.default
+App.config(main.default)
+
+export { }
