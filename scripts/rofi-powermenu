@@ -47,13 +47,13 @@ case $chosen in
     fi
     ;;
 "$lock")
-    "$SCRIPT_ROOT/screenlock"
+    loginctl lock-session
     ;;
 "$suspend")
     ans=$(confirm_exit)
     if [[ "$ans" == "$yes" ]]; then
         mpc -q pause
-        "$SCRIPT_ROOT/screenlock"
+        loginctl lock-session
         systemctl suspend
     else
         exit
