@@ -1,13 +1,7 @@
 import Battery from "./battery";
 import { VolumeIcon } from "./volume";
 import { BrightnessIcon } from "./brightness";
-
-function Separator() {
-  return Widget.Label({
-    label: `\uf444`,
-    class_name: "separator",
-  });
-}
+import { Separator } from "./separator";
 
 export default function() {
   return Widget.Box({

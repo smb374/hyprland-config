@@ -1,7 +1,8 @@
 import CenterPanel from "./centerpanel";
 import Weather from "./services/weather";
+import { Separator } from "./separator";
 
-const current_time = Variable("Xxx --. --:--", {
+const current_time = Variable("Xxx --.--:--", {
   poll: [1000, ["date", "+%b%e.%H:%M"]],
 });
 
@@ -25,12 +26,17 @@ export default function() {
       children: [
         Widget.Label({
           class_name: "weather-icon-small",
-          label: Weather.bind("realtime").as(() => Weather.getIcon().icon),
+          label: Weather.bind("realtime").as((data) => {
+            let icon = Weather.getIcon().icon;
+            if (data === undefined) {
+              return `${icon} --\u00B0C`;
+            } else {
+              return `${icon} ${data.current.temp_c}\u00B0C`;
+            }
+          }),
           tooltip_text: Weather.bind("realtime").as(() => Weather.getIcon().description),
         }),
-        Widget.Label({
-          label: " ",
-        }),
+        Separator(),
         Widget.Label({
           class_name: "clock",
           label: current_time.bind(),

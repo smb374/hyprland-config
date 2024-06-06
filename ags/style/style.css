@@ -111,7 +111,8 @@ progressbar trough {
   padding: 0 10px 0 10px; }
 
 .separator {
-  color: #a6adc8; }
+  color: #45475a;
+  padding: 0 5px 0 5px; }
 
 .volume {
   padding: 0; }
@@ -225,8 +226,8 @@ calendar {
     color: #9399b2; }
 
 .weather-icon-small {
-  font-family: "Symbols Nerd Font";
-  font-weight: normal;
+  font-family: "JetBrains Mono", "Symbols Nerd Font";
+  font-weight: bold;
   color: #cdd6f4; }
 
 .weather-card {
