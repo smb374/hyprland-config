@@ -1,40 +1,56 @@
 import Mpd from "./services/mpd";
+import Gtk30 from "gi://Gtk?version=3.0";
+
+function autoScroll(adjustment: Gtk30.Adjustment) {
+  adjustment.value += 1;
+
+  if (adjustment.value >= adjustment.upper - adjustment.page_size) {
+    Utils.timeout(1000, () => {
+      adjustment.value = 0;
+      Utils.timeout(500, () => autoScroll(adjustment));
+    });
+  } else {
+    Utils.timeout(40, () => autoScroll(adjustment));
+  }
+}
+
+function musicScroll(child) {
+  let scroll = Widget.Scrollable({
+    class_name: "music-scroll",
+    vscroll: "never",
+    hscroll: "automatic",
+    child: child,
+  });
+  Utils.timeout(500, () => autoScroll(scroll.hadjustment));
+  return scroll;
+}
 
 function musicLabels() {
   return Widget.Box({
     vertical: true,
     vpack: "start",
     children: [
-      Widget.Scrollable({
-        class_name: "music-scroll",
-        vscroll: "never",
-        hscroll: "automatic",
-        child: Widget.Label({
+      musicScroll(
+        Widget.Label({
           class_name: "music-title",
           hpack: "start",
           label: Mpd.bind("title"),
         }),
-      }),
-      Widget.Scrollable({
-        class_name: "music-scroll",
-        vscroll: "never",
-        hscroll: "automatic",
-        child: Widget.Label({
+      ),
+      musicScroll(
+        Widget.Label({
           class_name: "music-album",
           hpack: "start",
           label: Mpd.bind("album"),
         }),
-      }),
-      Widget.Scrollable({
-        class_name: "music-scroll",
-        vscroll: "never",
-        hscroll: "automatic",
-        child: Widget.Label({
+      ),
+      musicScroll(
+        Widget.Label({
           class_name: "music-artist",
           hpack: "start",
           label: Mpd.bind("artist"),
         }),
-      }),
+      ),
     ],
   });
 }
