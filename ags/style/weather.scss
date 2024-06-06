@@ -1,0 +1,29 @@
+@import "./mocha.scss";
+
+.weather-icon-small {
+    font-family: "Symbols Nerd Font";
+    font-weight: normal;
+    color: $text;
+    // font-size: 24pt;
+}
+
+.weather-card {
+    background-color: $base;
+    border-radius: 5px;
+    padding: 10px;
+    color: $text;
+}
+
+.weather-label {
+    font-family: "Symbols Nerd Font";
+    font-weight: normal;
+    font-size: 64px;
+}
+
+.weather-info-city {
+    font-size: 16px;
+}
+
+.weather-info-cond {
+    font-size: 14px;
+}

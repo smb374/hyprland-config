@@ -17,14 +17,6 @@ label {
     font-weight: bold;
 }
 
-button {
-    background: transparent;
-}
-
-button:hover {
-    box-shadow: unset;
-}
-
 progressbar trough {
     background: $surface1;
     border-radius: 5px;
@@ -33,7 +25,11 @@ progressbar trough {
 @import "./workspace.scss";
 @import "./systray.scss";
 @import "./clock.scss";
+@import "./centerpanel.scss";
 @import "./battery.scss";
 @import "./info.scss";
 @import "./volume.scss";
 @import "./brightness.scss";
+@import "./music.scss";
+@import "./calendar.scss";
+@import "./weather.scss";

@@ -1,0 +1,17 @@
+@import "./mocha.scss";
+
+.centerpanel {
+    background: transparent;
+    padding: 20px;
+}
+
+.calendar {
+    margin: 10px;
+}
+
+.centerpanelbox {
+    background: $surface0;
+    border-radius: 10px;
+    border: 2px solid $lavender;
+    padding: 10px;
+}

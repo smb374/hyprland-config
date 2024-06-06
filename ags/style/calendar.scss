@@ -1,0 +1,32 @@
+@import "./mocha.scss";
+
+calendar {
+    all: unset;
+    padding: 5px;
+    background: $base;
+    border-radius: 5px;
+    font-family: 'JetBrains Mono';
+    color: $text;
+
+    &.button {
+        color: $text;
+    }
+
+    &:selected {
+        background: $lavender;
+        color: $base;
+        border-radius: 5px;
+    }
+
+    &.header {
+        color: $blue;
+    }
+
+    &.highlight {
+        color: $red;
+    }
+
+    &:indeterminate {
+        color: $overlay2;
+    }
+}

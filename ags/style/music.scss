@@ -1,0 +1,99 @@
+@import "./mocha.scss";
+
+.music {
+    background: $base;
+    border-radius: 5px;
+    color: $text;
+    min-width: 220px;
+    // min-height: 360px;
+    padding: 10px;
+}
+
+.music-art {
+    min-width: 200px;
+    min-height: 200px;
+    // border-radius: 5px 0 0 5px;
+    border-radius: 5px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    padding: 10px;
+    margin: 0;
+}
+
+.music-cover {
+    border-radius: 5px;
+}
+
+.music-info {
+    padding: 0;
+}
+
+.music-title {
+    // font-family: "JetBrains Mono", "LXGW XiHei MN";
+    font-family: "LXGW WenKai";
+    font-size: 12pt;
+    font-weight: bold;
+}
+
+.music-album {
+    // font-family: "JetBrains Mono", "LXGW XiHei MN";
+    font-family: "LXGW WenKai";
+    font-size: 10pt;
+    color: $subtext1;
+}
+
+.music-artist {
+    // font-family: "JetBrains Mono", "LXGW XiHei MN";
+    font-family: "LXGW WenKai";
+    font-size: 9pt;
+    color: $subtext0;
+}
+
+.music-misc {
+    font-size: 9pt;
+    color: $subtext0;
+}
+
+.music-scroll scrollbar {
+    color: transparent;
+    background: transparent;
+    border: 0px transparent;
+}
+
+.music-scroll scrollbar trough {
+    color: transparent;
+    background: transparent;
+    border: 0px transparent;
+}
+
+.music-scroll scrollbar contents {
+    color: transparent;
+    background: transparent;
+    border: 0px transparent;
+}
+
+.music-scroll scrollbar slider {
+    color: transparent;
+    background: transparent;
+    border: 0px transparent;
+}
+
+.music-control {
+    font-family: 'JetBrainsMono Nerd Font';
+    margin: 0 5px 0 5px;
+
+    & button {
+        background: $base;
+    }
+
+    & button:hover {
+        background: $base;
+        box-shadow: unset;
+    }
+}
+
+.music-control-butn {
+    font-size: 20px;
+    color: $text;
+}

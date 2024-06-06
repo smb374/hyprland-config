@@ -1,23 +1,31 @@
 #!/bin/sh
 
-MPD_UPDATE="$SCRIPT_ROOT/update-mpd"
-cover_cache=""
-title_cache=""
-icon="/tmp/music_cover_icon.jpg"
+# MPD_UPDATE="$SCRIPT_ROOT/update-mpd"
+COVER_CACHE=""
+TITLE_CACHE=""
+ICON="/tmp/music_cover_icon.jpg"
+LOG_FILE="/tmp/watch-mpd.log"
+
+log() {
+    echo "$(date +'%Y%m%dT%H%M%SZ%z') ${1}" >> "$LOG_FILE"
+}
 
 routine() {
-    sh "$MPD_UPDATE"
     cover="$(mpd_cover_path)"
-    if [ "$cover" != "$cover_cache" ]; then
-        cover_cache="$cover"
-        convert -resize x64 "$cover" -quality 90 "$icon"
+    log "cover = $cover; COVER_CACHE = $COVER_CACHE"
+    if [ "$cover" != "$COVER_CACHE" ]; then
+        log "Album Changed"
+        COVER_CACHE="$cover"
+        convert -resize x64 "$cover" -quality 90 "$ICON"
     fi
     title="$(mpc status -f '%title%' | sed -n '1p')"
-    if [ "$title" != "$title_cache" ]; then
-        title_cache="$title"
+    if [ "$title" != "$TITLE_CACHE" ]; then
+        log "Song Changed"
+        TITLE_CACHE="$title"
         content="$(mpc status -f '%album%\n%artist%' | sed -n '1,2p')"
-        notify-send -t 5000 -i "$icon" "$title" "$content"
+        notify-send -t 5000 -i "$ICON" "$title" "$content"
     fi
+    # sh "$MPD_UPDATE"
 }
 
 routine

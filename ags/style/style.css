@@ -11,12 +11,6 @@
 label {
   font-weight: bold; }
 
-button {
-  background: transparent; }
-
-button:hover {
-  box-shadow: unset; }
-
 progressbar trough {
   background: #45475a;
   border-radius: 5px; }
@@ -52,17 +46,33 @@ progressbar trough {
   padding: 0 5px 0 5px; }
 
 .tray button {
+  background: transparent;
   padding: 5px; }
 
 .tray button:hover {
   background: transparent; }
 
 .clock {
+  color: #cdd6f4;
+  font-weight: bold; }
+
+.centerpanebutn {
   background: #1e1e2e;
   border-radius: 5px;
-  color: #cdd6f4;
-  font-weight: bold;
   padding: 0 10px 0 10px; }
+
+.centerpanel {
+  background: transparent;
+  padding: 20px; }
+
+.calendar {
+  margin: 10px; }
+
+.centerpanelbox {
+  background: #313244;
+  border-radius: 10px;
+  border: 2px solid #b4befe;
+  padding: 10px; }
 
 .battery {
   padding: 0; }
@@ -118,3 +128,120 @@ progressbar trough {
   font-size: 22px;
   color: #f9e2af;
   padding: 0; }
+
+.music {
+  background: #1e1e2e;
+  border-radius: 5px;
+  color: #cdd6f4;
+  min-width: 220px;
+  padding: 10px; }
+
+.music-art {
+  min-width: 200px;
+  min-height: 200px;
+  border-radius: 5px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  padding: 10px;
+  margin: 0; }
+
+.music-cover {
+  border-radius: 5px; }
+
+.music-info {
+  padding: 0; }
+
+.music-title {
+  font-family: "LXGW WenKai";
+  font-size: 12pt;
+  font-weight: bold; }
+
+.music-album {
+  font-family: "LXGW WenKai";
+  font-size: 10pt;
+  color: #bac2de; }
+
+.music-artist {
+  font-family: "LXGW WenKai";
+  font-size: 9pt;
+  color: #a6adc8; }
+
+.music-misc {
+  font-size: 9pt;
+  color: #a6adc8; }
+
+.music-scroll scrollbar {
+  color: transparent;
+  background: transparent;
+  border: 0px transparent; }
+
+.music-scroll scrollbar trough {
+  color: transparent;
+  background: transparent;
+  border: 0px transparent; }
+
+.music-scroll scrollbar contents {
+  color: transparent;
+  background: transparent;
+  border: 0px transparent; }
+
+.music-scroll scrollbar slider {
+  color: transparent;
+  background: transparent;
+  border: 0px transparent; }
+
+.music-control {
+  font-family: 'JetBrainsMono Nerd Font';
+  margin: 0 5px 0 5px; }
+  .music-control button {
+    background: #1e1e2e; }
+  .music-control button:hover {
+    background: #1e1e2e;
+    box-shadow: unset; }
+
+.music-control-butn {
+  font-size: 20px;
+  color: #cdd6f4; }
+
+calendar {
+  all: unset;
+  padding: 5px;
+  background: #1e1e2e;
+  border-radius: 5px;
+  font-family: 'JetBrains Mono';
+  color: #cdd6f4; }
+  calendar.button {
+    color: #cdd6f4; }
+  calendar:selected {
+    background: #b4befe;
+    color: #1e1e2e;
+    border-radius: 5px; }
+  calendar.header {
+    color: #89b4fa; }
+  calendar.highlight {
+    color: #f38ba8; }
+  calendar:indeterminate {
+    color: #9399b2; }
+
+.weather-icon-small {
+  font-family: "Symbols Nerd Font";
+  font-weight: normal;
+  color: #cdd6f4; }
+
+.weather-card {
+  background-color: #1e1e2e;
+  border-radius: 5px;
+  padding: 10px;
+  color: #cdd6f4; }
+
+.weather-label {
+  font-family: "Symbols Nerd Font";
+  font-weight: normal;
+  font-size: 64px; }
+
+.weather-info-city {
+  font-size: 16px; }
+
+.weather-info-cond {
+  font-size: 14px; }
