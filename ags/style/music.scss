@@ -4,14 +4,14 @@
     background: $base;
     border-radius: 5px;
     color: $text;
-    min-width: 220px;
+    min-width: 260px;
     // min-height: 360px;
     padding: 10px;
 }
 
 .music-art {
-    min-width: 200px;
-    min-height: 200px;
+    min-width: 240px;
+    min-height: 240px;
     // border-radius: 5px 0 0 5px;
     border-radius: 5px;
     background-size: cover;
@@ -31,22 +31,22 @@
 
 .music-title {
     // font-family: "JetBrains Mono", "LXGW XiHei MN";
-    font-family: "LXGW WenKai";
-    font-size: 12pt;
+    font-family: "LXGW WenKai TC";
+    font-size: 14pt;
     font-weight: bold;
 }
 
 .music-album {
     // font-family: "JetBrains Mono", "LXGW XiHei MN";
-    font-family: "LXGW WenKai";
-    font-size: 10pt;
+    font-family: "LXGW WenKai TC";
+    font-size: 12pt;
     color: $subtext1;
 }
 
 .music-artist {
     // font-family: "JetBrains Mono", "LXGW XiHei MN";
-    font-family: "LXGW WenKai";
-    font-size: 9pt;
+    font-family: "LXGW WenKai TC";
+    font-size: 12pt;
     color: $subtext0;
 }
 

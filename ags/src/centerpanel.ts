@@ -9,7 +9,7 @@ export default function(monitor: number) {
   let left = Widget.Box({
     vertical: true,
     vpack: "fill",
-    spacing: 10,
+    spacing: 5,
     children: [
       Widget.Box({
         vexpand: true,

@@ -134,12 +134,12 @@ progressbar trough {
   background: #1e1e2e;
   border-radius: 5px;
   color: #cdd6f4;
-  min-width: 220px;
+  min-width: 260px;
   padding: 10px; }
 
 .music-art {
-  min-width: 200px;
-  min-height: 200px;
+  min-width: 240px;
+  min-height: 240px;
   border-radius: 5px;
   background-size: cover;
   background-repeat: no-repeat;
@@ -154,18 +154,18 @@ progressbar trough {
   padding: 0; }
 
 .music-title {
-  font-family: "LXGW WenKai";
-  font-size: 12pt;
+  font-family: "LXGW WenKai TC";
+  font-size: 14pt;
   font-weight: bold; }
 
 .music-album {
-  font-family: "LXGW WenKai";
-  font-size: 10pt;
+  font-family: "LXGW WenKai TC";
+  font-size: 12pt;
   color: #bac2de; }
 
 .music-artist {
-  font-family: "LXGW WenKai";
-  font-size: 9pt;
+  font-family: "LXGW WenKai TC";
+  font-size: 12pt;
   color: #a6adc8; }
 
 .music-misc {

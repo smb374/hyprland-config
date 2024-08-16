@@ -111,7 +111,7 @@ class MpdService extends Service {
           Utils.execAsync(`mpd_cover_path`).then(out => {
             if (this.cover_path !== out) {
               this.cover_path = out;
-              const basePixel = 200;
+              const basePixel = 240;
 
               Promise.all([
                 calculateImageWidth(out, basePixel),

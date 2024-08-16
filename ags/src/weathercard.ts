@@ -131,6 +131,7 @@ export function WeatherCard() {
     class_name: "weather-card",
     vertical: true,
     hexpand: true,
+    vexpand: true,
     spacing: 10,
     children: [
       weatherIcon(),
